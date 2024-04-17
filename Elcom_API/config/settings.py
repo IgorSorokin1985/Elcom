@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
 
+    'drf_yasg',
     'corsheaders',
 
     'users',
@@ -109,7 +110,6 @@ DATABASES = {
         'NAME': DATABASE_NAME,
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
-        #'HOST': 'db',
     }
 }
 

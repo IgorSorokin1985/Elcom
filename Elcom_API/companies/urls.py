@@ -1,5 +1,6 @@
 from django.urls import path
-from companies.views import CompanyListAPIView, CompanyUpdateAPIView, CompanyDestroyAPIView, CompanyRetrieveAPIView, CompanyCreateAPIView
+from companies.views import (CompanyListAPIView, CompanyUpdateAPIView, CompanyDestroyAPIView, CompanyRetrieveAPIView,
+                             CompanyCreateAPIView)
 from companies.apps import CompaniesConfig
 
 app_name = CompaniesConfig.name

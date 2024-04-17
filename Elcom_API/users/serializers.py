@@ -5,7 +5,6 @@ from users.models import User, Log
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for User Model"""
 
-
     class Meta:
         model = User
         fields = "__all__"

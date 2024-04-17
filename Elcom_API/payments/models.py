@@ -1,7 +1,4 @@
 from django.db import models
-from users.models import User
-from companies.models import Company
-from items.models import Item
 from orders.models import Order
 
 NULLABLE = {'blank': True, 'null': True}

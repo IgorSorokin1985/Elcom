@@ -1,6 +1,5 @@
-from django.shortcuts import render
 from companies.models import Company
-from rest_framework import viewsets, generics, status
+from rest_framework import generics
 from companies.serializer import CompanySerializer
 
 # Create your views here.
@@ -16,7 +15,6 @@ class CompanyCreateAPIView(generics.CreateAPIView):
         user.company = new_company
         user.save()
         new_company.save()
-
 
 
 class CompanyListAPIView(generics.ListAPIView):

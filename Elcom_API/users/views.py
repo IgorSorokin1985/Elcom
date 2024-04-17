@@ -6,7 +6,6 @@ from users.models import User, Log
 from orders.models import Order
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsTelegramUser
-from users.utils import get_user_by_telegram
 # Create your views here.
 
 

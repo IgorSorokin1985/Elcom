@@ -34,11 +34,11 @@ def create_invoice_pdf(order):
     pisa.showLogging()
     output_filename = f"invoices/order_{order.id}_from_{order.data}.pdf"
     result_file = open('media/' + output_filename, "w+b")
-    pisa_status = pisa.CreatePDF(
+    pisa.CreatePDF(
         invoice_html,
         dest=result_file)
     result_file.close()
-    return URL +'media/' + output_filename
+    return URL + 'media/' + output_filename
 
 
 def create_invoice_html(order):
@@ -115,7 +115,7 @@ def create_invoice_html(order):
             <table class="invoice-table">
             <thead>
                 <tr>
-                    <th>Item</th>                    
+                    <th>Item</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
                     <th>Availability</th>
