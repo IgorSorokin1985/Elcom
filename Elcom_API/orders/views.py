@@ -24,7 +24,7 @@ class OrderListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         list_orders = super().get_queryset()
-        if IsTelegramUser:
+        if 'chartID' in self.request.headers:
             user = get_user_by_telegram(self.request)
         else:
             user = self.request.user
@@ -45,7 +45,7 @@ class OrderUpdateAPIView(generics.UpdateAPIView):
     permission_classes = [IsAuthenticated | IsTelegramUser, IsOwner]
 
     def perform_update(self, serializer):
-        if IsTelegramUser:
+        if 'chartID' in self.request.headers:
             user = get_user_by_telegram(self.request)
         else:
             user = self.request.user
@@ -86,7 +86,7 @@ class GetLastOrderByUser(APIView):
     permission_classes = [IsAuthenticated | IsTelegramUser]
 
     def get(self, *args, **kwargs):
-        if IsTelegramUser:
+        if 'chartID' in self.request.headers:
             user = get_user_by_telegram(self.request)
         else:
             user = self.request.user
@@ -146,7 +146,7 @@ class PositionDestroyAPIView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated | IsTelegramUser]
 
     def perform_destroy(self, *args, **kwargs):
-        if IsTelegramUser:
+        if 'chartID' in self.request.headers:
             user = get_user_by_telegram(self.request)
         else:
             user = self.request.user
@@ -167,7 +167,7 @@ class PositionAddAPIView(APIView):
     permission_classes = [IsAuthenticated | IsTelegramUser]
 
     def post(self, *args, **kwargs):
-        if IsTelegramUser:
+        if 'chartID' in self.request.headers:
             user = get_user_by_telegram(self.request)
         else:
             user = self.request.user

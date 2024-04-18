@@ -79,7 +79,12 @@ class LogRetrieveAPIView(generics.RetrieveAPIView):
 class UserCheckByTelegramAPIView(APIView):
 
     def get(self, *args, **kwargs):
-        if IsTelegramUser:
-            return Response({"answer": True})
+        if 'chartID' in self.request.headers:
+            telegram_chat_id = self.request.headers["chartID"]
+            result = User.objects.all().filter(telegram_chat_id=telegram_chat_id)
+            if result:
+                return Response({"answer": True})
+            else:
+                return Response({"answer": False})
         else:
             return Response({"answer": False})

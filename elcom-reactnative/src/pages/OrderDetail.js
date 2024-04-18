@@ -8,7 +8,7 @@ const OrderDetails = ({ route }) => {
 
   const handlePayPress = () => {
     console.log(order.url_for_pay);
-    Linking.openURL(order.url_for_pay.slice(0, -1));
+    Linking.openURL(order.url_for_pay);
   };
 
   const handleDownloadPress = () => {

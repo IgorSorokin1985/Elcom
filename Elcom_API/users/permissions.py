@@ -4,9 +4,9 @@ from users.utils import get_user_by_telegram
 
 
 class IsTelegramUser (BasePermission):
-
+    """ Permission for checking telegram chart id user """
     def has_permission(self, request, view):
-        if request.headers["chartID"]:
+        if 'chartID' in request.headers:
             telegram_chat_id = request.headers["chartID"]
             result = User.objects.all().filter(telegram_chat_id=telegram_chat_id)
             if result:
@@ -18,11 +18,11 @@ class IsTelegramUser (BasePermission):
 
 
 class IsOwner(BasePermission):
-    """Permission for checking owner"""
+    """ Permission for checking owner """
     message = "You are not owner"
 
     def has_object_permission(self, request, view, obj):
-        if request.headers["chartID"]:
+        if 'chartID' in request.headers:
             user = get_user_by_telegram(request)
         else:
             user = request.user

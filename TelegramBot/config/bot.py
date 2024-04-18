@@ -3,7 +3,7 @@ from aiogram import Bot, Dispatcher, F
 from handlers import router
 
 
-bot = Bot(TELEGRAM_TOKEN, parse_mode="MarkdownV2")
+bot = Bot(TELEGRAM_TOKEN, parse_mode="Markdown")
 dp = Dispatcher()
 
 

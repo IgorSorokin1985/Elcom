@@ -22,7 +22,7 @@ async def cmd_start(message: Message):
 
 @router.message(F.text == 'Catalog')
 async def get_catalog(message: Message):
-    await message.answer('Choose category!', reply_markup=await kb.categories_keyboard())
+    await message.answer('Choose category', reply_markup=await kb.categories_keyboard())
 
 
 @router.message(F.text == 'My Orders')
@@ -32,8 +32,8 @@ async def get_my_orders(message: Message):
     await message.answer("Your last 10 Orders")
     for order in orders[-10:]:
         await message.answer(f"""{order["id"]} from {order["data"]}.
-Total - {order["summa"]} 
-Status - {order["status"]}
+Total {order["summa"]} 
+Status {order["status"]}
 Payment status - {order["payment_status"]}""", reply_markup=await kb.user_order(order))
 
 
@@ -46,11 +46,16 @@ async def get_user_order(callback: CallbackQuery):
     for index, position in enumerate(positions):
         await callback.message.answer(create_position_message(index, position))
     await callback.message.answer(create_order_message(order_info))
-    await callback.message.answer(f'''
+    if "invoice" in order_info:
+        await callback.message.answer(f'''
 Link for loading invoice:
-{order_info["invoice"]}
+{link('Invoice', order_info["invoice"])}
+''')
+    if "url_for_pay" in order_info:
+        await callback.message.answer(f'''
 Link for pay:
-{order_info["url_for_pay"]}''')
+{link('Pay', order_info["url_for_pay"])}
+''')
 
 
 @router.message(F.text == 'Registration')
@@ -75,16 +80,23 @@ async def finish_order(callback: CallbackQuery):
     print(finished_order_info)
     await callback.answer("")
     await callback.message.answer(f'''Congratulations! 
+You completed order''')
+    if "invoice" in finished_order_info:
+        await callback.message.answer(f'''
 Link for loading invoice:
-{link('link_for_invoice', finished_order_info["invoice"])}
+{link('Invoice', finished_order_info["invoice"])}
+    ''')
+    if "url_for_pay" in finished_order_info:
+        await callback.message.answer(f'''
 Link for pay:
-{link('link_for_pay', finished_order_info["url_for_pay"])}''')
+{link('Pay', finished_order_info["url_for_pay"])}
+    ''')
 
 
 @router.callback_query(F.data.startswith('category_'))
 async def category_selected(callback: CallbackQuery):
     await callback.answer("")
-    await callback.message.edit_text('Choose Item!', reply_markup=await kb.items_keyboard(int(callback.data.split("_")[1])))
+    await callback.message.edit_text('Choose Item', reply_markup=await kb.items_keyboard(int(callback.data.split("_")[1])))
 
 
 @router.callback_query(F.data.startswith('item_'))
@@ -98,10 +110,10 @@ async def item_selected(callback: CallbackQuery):
         #photo=item["foto"],
         caption=f"""
 Selected Item:
-{item["name"]}!
-{item["stock"]} in stock.
-Weight - {item["weight"]} kg.
-Price - {item["price"]} USD.
+{item["name"]}
+{item["stock"]} in stock
+Weight {item["weight"]} kg
+Price {item["price"]} USD
 """, reply_markup=await kb.add_item(item["id"]))
 
 
@@ -112,10 +124,10 @@ async def item_added(callback: CallbackQuery):
     await create_position(item, str(callback.from_user.id))
     await callback.message.answer(f"""
 Was added Item:
-{item["name"]}!
-Quantaty - 1.
-Weight - {item["weight"]} kg.
-Price - {item["price"]} USD.
+{item["name"]}
+Quantaty 1
+Weight - {item["weight"]} kg
+Price - {item["price"]} USD
 """)
 
 

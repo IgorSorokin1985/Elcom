@@ -22,7 +22,7 @@ class ItemsRetrieveAPIView(generics.RetrieveAPIView):
 
     def retrieve(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_object())
-        if IsTelegramUser:
+        if "chartID" in self.request.headers:
             user = get_user_by_telegram(request)
         else:
             user = self.request.user
