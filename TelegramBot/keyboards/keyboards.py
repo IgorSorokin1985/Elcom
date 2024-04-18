@@ -1,7 +1,7 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
-from API.requests import get_items, get_categories
+from API.itemAPI import get_items, get_categories
 
 
 main = ReplyKeyboardMarkup(keyboard=[
