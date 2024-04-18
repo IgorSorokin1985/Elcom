@@ -3,10 +3,9 @@ from API.urls import LAST_ORDER_URL, ADD_POSITION_URL, ORDER_URL, DELETE_POSITIO
 
 
 async def get_cart(telegram_chart_id):
-    async with aiohttp.ClientSession() as session:
-        order = await get_last_order(telegram_chart_id)
-        cart = await get_order(telegram_chart_id, order["order_id"])
-        return cart
+    order = await get_last_order(telegram_chart_id)
+    cart = await get_order(telegram_chart_id, order["order_id"])
+    return cart
 
 
 async def get_order(telegram_chart_id, order_id):
@@ -56,5 +55,5 @@ async def create_position(item, telegram_chart_id):
 async def delete_position(telegram_chart_id, position_id):
     async with aiohttp.ClientSession() as session:
         async with session.delete(DELETE_POSITION_URL + position_id + "/delete/",
-                               headers={"chartID": telegram_chart_id}) as response:
+                                  headers={"chartID": telegram_chart_id}) as response:
             return await response.json(content_type=None)

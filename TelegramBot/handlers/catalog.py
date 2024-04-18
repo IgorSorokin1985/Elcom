@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
-import keyboards.keyboards as kb
+import keyboards.catalog as kb
 from API.itemAPI import get_item
 from API.orderAPI import create_position
 
@@ -16,7 +16,8 @@ async def get_catalog(message: Message):
 @catalog_router.callback_query(F.data.startswith('category_'))
 async def category_selected(callback: CallbackQuery):
     await callback.answer("")
-    await callback.message.edit_text('Choose Item', reply_markup=await kb.items_keyboard(int(callback.data.split("_")[1])))
+    await callback.message.edit_text('Choose Item',
+                                     reply_markup=await kb.items_keyboard(int(callback.data.split("_")[1])))
 
 
 @catalog_router.callback_query(F.data.startswith('item_'))

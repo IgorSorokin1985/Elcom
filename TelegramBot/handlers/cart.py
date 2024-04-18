@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
-import keyboards.keyboards as kb
+import keyboards.cart as kb
 from API.orderAPI import get_cart, finish_cart, delete_position
 from utils.utils import create_cart_message, create_position_message
 from aiogram.utils.markdown import link
@@ -23,7 +23,7 @@ async def finish_order(callback: CallbackQuery):
     finished_order_info = await finish_cart(str(callback.from_user.id), order_id)
     print(finished_order_info)
     await callback.answer("")
-    await callback.message.answer(f'''Congratulations! 
+    await callback.message.answer('''Congratulations!
 You completed order''')
     if "invoice" in finished_order_info:
         await callback.message.answer(f'''

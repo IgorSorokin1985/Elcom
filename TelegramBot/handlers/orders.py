@@ -1,6 +1,6 @@
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery
-import keyboards.keyboards as kb
+import keyboards.orders as kb
 from API.orderAPI import get_orders, get_order
 from utils.utils import create_position_message, create_order_message
 from aiogram.utils.markdown import link
@@ -14,7 +14,7 @@ async def get_my_orders(message: Message):
     await message.answer("Your last 10 Orders")
     for order in orders[-10:]:
         await message.answer(f"""{order["id"]} from {order["data"]}.
-Total {order["summa"]} 
+Total {order["summa"]}
 Status {order["status"]}
 Payment status - {order["payment_status"]}""", reply_markup=await kb.user_order(order))
 
