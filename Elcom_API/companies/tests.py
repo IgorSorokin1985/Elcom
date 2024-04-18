@@ -23,8 +23,7 @@ class CompanyAPITest(APITestCase):
 
     def test_get_companies(self):
         self.client.force_authenticate(user=self.user)
-        response = self.client.get(
-            f'/companies/')
+        response = self.client.get('/companies/')
         self.assertEqual(
             response.status_code,
             status.HTTP_200_OK

@@ -5,7 +5,6 @@ from users.serializers import UserSerializer, LogSerializer
 from users.models import User, Log
 from orders.models import Order
 from rest_framework.permissions import IsAuthenticated
-from users.permissions import IsTelegramUser
 # Create your views here.
 
 

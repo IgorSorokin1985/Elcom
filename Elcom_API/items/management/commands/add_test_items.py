@@ -253,8 +253,8 @@ test_gears = [
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        #Item.objects.all().delete()
-        #print('Items were deleted in database')
+        Item.objects.all().delete()
+        print('Items were deleted in database')
         for category in test_categories:
             new_category = Category.objects.create(**category)
             new_category.save()

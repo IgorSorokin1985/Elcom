@@ -26,12 +26,8 @@ class ItemAPITest(APITestCase):
 
     def test_get_items(self):
         self.client.force_authenticate(user=self.user)
-        response = self.client.get(
-            f'/items/')
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response = self.client.get('/items/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_item(self):
         self.client.force_authenticate(user=self.user)
@@ -44,9 +40,5 @@ class ItemAPITest(APITestCase):
 
     def test_get_categories(self):
         self.client.force_authenticate(user=self.user)
-        response = self.client.get(
-            f'/categories/')
-        self.assertEqual(
-            response.status_code,
-            status.HTTP_200_OK
-        )
+        response = self.client.get('/categories/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
