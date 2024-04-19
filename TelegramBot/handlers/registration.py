@@ -39,7 +39,6 @@ async def registration_email(message: Message, state: FSMContext):
 async def registration_password(message: Message, state: FSMContext):
     await state.update_data(password=message.text)
     data = await state.get_data()
-    answer = await registration_user(data["name"], data["email"], data["password"], str(message.from_user.id))
-    print(answer)
+    await registration_user(data["name"], data["email"], data["password"], str(message.from_user.id))
     await message.answer('Registration is over. Press start again', reply_markup=kb.start)
     await state.clear()
