@@ -13,10 +13,10 @@ async def get_my_orders(message: Message):
     orders = await get_orders(str(message.from_user.id))
     await message.answer("Your last 10 Orders")
     for order in orders[-10:]:
-        await message.answer(f"""{order["id"]} from {order["data"]}.
-Total {order["summa"]}
-Status {order["status"]}
-Payment status - {order["payment_status"]}""", reply_markup=await kb.user_order(order))
+        await message.answer(f"""{order['id']} from {order['data']}.
+Total {order['summa']}
+Status {order['status']}
+Payment status - {order['payment_status']}""", reply_markup=await kb.user_order(order))
 
 
 @orders_router.callback_query(F.data.startswith('order_'))
@@ -29,12 +29,12 @@ async def get_user_order(callback: CallbackQuery):
         await callback.message.answer(create_position_message(index, position))
     await callback.message.answer(create_order_message(order_info))
     if "invoice" in order_info:
-        await callback.message.answer(f'''
+        await callback.message.answer(f"""
 Link for loading invoice:
-{link('Invoice', order_info["invoice"])}
-''')
+{link('Invoice', order_info['invoice'])}
+""")
     if "url_for_pay" in order_info:
-        await callback.message.answer(f'''
+        await callback.message.answer(f"""
 Link for pay:
-{link('Pay', order_info["url_for_pay"])}
-''')
+{link('Pay', order_info['url_for_pay'])}
+""")

@@ -26,15 +26,15 @@ async def finish_order(callback: CallbackQuery):
     await callback.message.answer('''Congratulations!
 You completed order''')
     if "invoice" in finished_order_info:
-        await callback.message.answer(f'''
+        await callback.message.answer(f"""
 Link for loading invoice:
-{link('Invoice', finished_order_info["invoice"])}
-    ''')
+{link('Invoice', finished_order_info['invoice'])}
+    """)
     if "url_for_pay" in finished_order_info:
-        await callback.message.answer(f'''
+        await callback.message.answer(f"""
 Link for pay:
-{link('Pay', finished_order_info["url_for_pay"])}
-    ''')
+{link('Pay', finished_order_info['url_for_pay'])}
+    """)
 
 
 @cart_router.callback_query(F.data.startswith('deleteposition_'))

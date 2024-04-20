@@ -27,15 +27,15 @@ async def item_selected(callback: CallbackQuery):
     print(item)
 
     await callback.message.answer_photo(
-        photo="https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcTZCSmCzmIPm0up8wmW566cK5w3sSTUChT5UnaU3VnFxrHwoRNSnks0xUBmj2r2oeJk",
-        #photo=item["foto"],
+        photo="https://www.elcomspb.ru/image/cache/catalog/products/to/engine/5ai/56/1081/5%D0%90%D0%98_56_%D0%924_0_18_1500_IM_1081/1-600x600.jpg",
+        #photo="http://158.160.68.151:9000/media/pump.jpg",
         caption=f"""
 Selected Item:
-{item["name"]}
-{item["stock"]} in stock
-Weight {item["weight"]} kg
-Price {item["price"]} USD
-""", reply_markup=await kb.add_item(item["id"]))
+{item['name']}
+{item['stock']} in stock
+Weight {item['weight']} kg
+Price {item['price']} USD
+""", reply_markup=await kb.add_item(item['id']))
 
 
 @catalog_router.callback_query(F.data.startswith('additem_'))
@@ -45,8 +45,8 @@ async def item_added(callback: CallbackQuery):
     await create_position(item, str(callback.from_user.id))
     await callback.message.answer(f"""
 Was added Item:
-{item["name"]}
-Quantaty 1
-Weight - {item["weight"]} kg
-Price - {item["price"]} USD
+{item['name']}
+Quantity 1
+Weight - {item['weight']} kg
+Price - {item['price']} USD
 """)

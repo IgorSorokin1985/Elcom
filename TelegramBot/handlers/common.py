@@ -16,4 +16,4 @@ async def cmd_start(message: Message):
     if answer["answer"]:
         await message.answer('Hello, Can I help you?', reply_markup=kb.main)
     else:
-        await message.answer('You need to register?', reply_markup=kb.new_user)
+        await message.answer('You should to register', reply_markup=kb.new_user)
