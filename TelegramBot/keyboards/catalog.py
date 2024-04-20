@@ -9,8 +9,8 @@ async def items_keyboard(category_id):
     items = await get_items()
     for item in items:
         if item["category"] == category_id:
-            keyboard.add(InlineKeyboardButton(text=f"{item["name"]} - {item["price"]} USD",
-                                              callback_data=f"item_{item["id"]}"))
+            keyboard.add(InlineKeyboardButton(text=f"{item['name']} - {item['price']} USD",
+                                              callback_data=f"item_{item['id']}"))
     return keyboard.adjust(1).as_markup()
 
 
@@ -18,7 +18,7 @@ async def categories_keyboard():
     keyboard = InlineKeyboardBuilder()
     categories = await get_categories()
     for category in categories:
-        keyboard.add(InlineKeyboardButton(text=f"{category["name"]}", callback_data=f"category_{category["id"]}"))
+        keyboard.add(InlineKeyboardButton(text=f"{category['name']}", callback_data=f"category_{category['id']}"))
     return keyboard.adjust(1).as_markup()
 
 

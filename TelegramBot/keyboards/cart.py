@@ -10,5 +10,5 @@ async def finish_order(order_id):
 
 async def position_actions(position):
     keyboard = InlineKeyboardBuilder()
-    keyboard.add(InlineKeyboardButton(text="Delete this position", callback_data=f"deleteposition_{position["id"]}"))
+    keyboard.add(InlineKeyboardButton(text="Delete this position", callback_data=f"deleteposition_{position['id']}"))
     return keyboard.adjust(1).as_markup()
